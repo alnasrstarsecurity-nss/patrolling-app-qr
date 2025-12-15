@@ -1,4 +1,4 @@
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw5I4eQnpUrAmsQgqPjEfRL3IPzzu8IB2zlmuWFsBpAf0rcAG7OPa3Sx92JdLm3175NZA/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzvLIpaYh7gdKE-vRoWhEL2t79CIzUX0di_AvJt4weIP56BEsKOJ1kUEhvwxGtRKIXiFg/exec";
 
 let lat = "", lng = "";
 
@@ -35,78 +35,39 @@ function toBase64(file) {
 }
 
 async function submitVisit() {
+  status.innerText = "Submitting...";
 
-  const statusEl = document.getElementById("status");
-  statusEl.style.color = "black";
-  statusEl.innerText = "Submitting...";
+  const files = photos.files;
+  if (files.length > 5) {
+    alert("Max 5 photos");
+    return;
+  }
 
-  try {
-    if (!location.value) {
-      alert("Please select location");
-      return;
-    }
+  const photos64 = [];
+  for (let f of files) photos64.push(await toBase64(f));
 
-    if (photos.files.length > 5) {
-      alert("Maximum 5 photos allowed");
-      return;
-    }
-
-    const photos64 = [];
-    for (let f of photos.files) {
-      photos64.push(await toBase64(f));
-    }
-
-    const payload = {
+  fetch(SCRIPT_URL, {
+    method: "POST",
+    body: JSON.stringify({
       action: "submit",
       username: localStorage.getItem("user"),
       password: localStorage.getItem("pass"),
       location: location.value,
       checklist: [...document.querySelectorAll(".chk:checked")].map(c => c.value),
       remarks: remarks.value,
-      lat: lat || "",
-      lng: lng || "",
+      lat, lng,
       photos: photos64,
       signature: canvas.toDataURL(),
       syncStatus: navigator.onLine ? "ONLINE" : "OFFLINE"
-    };
-
-    const response = await fetch(SCRIPT_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
-
-    const result = await response.json();
-
-    if (result.status === "success") {
-      statusEl.style.color = "green";
-      statusEl.innerText = "✅ Submitted successfully";
-
-      resetForm();
-
-      // OPTIONAL: auto-clear message after 2 seconds
-      setTimeout(() => {
-        statusEl.innerText = "";
-      }, 2000);
-
+    })
+  })
+  .then(r => r.json())
+  .then(res => {
+    if (res.status === "success") {
+      status.innerText = "✅ Submitted successfully";
     } else {
-      statusEl.style.color = "red";
-      statusEl.innerText = "❌ Submission failed";
+      status.innerText = "❌ Submit failed";
     }
-
-  } catch (err) {
-    console.error(err);
-    statusEl.style.color = "red";
-    statusEl.innerText = "❌ Network error";
-  }
-}
-
-
-//reset form
-function resetForm() {
-  document.getElementById("location").selectedIndex = 0;
-  document.getElementById("remarks").value = "";
-  document.querySelectorAll(".chk").forEach(c => c.checked = false);
-  document.getElementById("photos").value = "";
-  clearSign();
+  })
+  .catch(() => status.innerText = "❌ Network error");
 }
