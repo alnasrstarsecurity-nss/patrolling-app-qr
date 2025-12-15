@@ -75,7 +75,7 @@ textarea:focus {
 
 /* Signature */
 canvas {
-  width: 100%;
+  width: 50%;
   height: 150px;
   border: 2px dashed #c7c7c7;
   border-radius: 8px;
