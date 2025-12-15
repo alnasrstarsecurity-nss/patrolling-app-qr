@@ -109,6 +109,16 @@ function resetForm() {
   clearSign();
 }
 
+
+function logout() {
+  localStorage.removeItem("user");
+  localStorage.removeItem("pass");
+  window.location.href = "index.html";
+}
+
+
+
+
 function clearStatus() {
   document.getElementById("status").innerText = "";
 }
