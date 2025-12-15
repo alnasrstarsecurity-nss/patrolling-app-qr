@@ -100,3 +100,13 @@ async function submitVisit() {
     statusEl.innerText = "❌ Network error";
   }
 }
+
+
+//reset form
+function resetForm() {
+  document.getElementById("location").selectedIndex = 0;
+  document.getElementById("remarks").value = "";
+  document.querySelectorAll(".chk").forEach(c => c.checked = false);
+  document.getElementById("photos").value = "";
+  clearSign();
+}
