@@ -1,20 +1,20 @@
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwckTjNKdNU3PNKbAL3qkWYvdhVGtjMv5nWcCkfTkN-4KrEh8RhR3L361l-3XwPo9HZcw/exec";
 
-
 const form = document.getElementById("aqclForm");
 const status = document.getElementById("status");
 
-/* -------- RADIO VALUE -------- */
+/* ---------- RADIO HELPER ---------- */
 function radio(name) {
   const r = document.querySelector(`input[name="${name}"]:checked`);
   return r ? r.value : "";
 }
 
-/* -------- SIGNATURE -------- */
+/* ---------- SIGNATURE ---------- */
 const canvas = document.getElementById("sign");
 const ctx = canvas.getContext("2d");
 ctx.lineWidth = 2.5;
 ctx.lineCap = "round";
+
 let drawing = false;
 
 function resizeCanvas() {
@@ -67,15 +67,29 @@ function clearSignature() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-/* -------- SUBMIT -------- */
+/* ---------- SUBMIT ---------- */
 form.addEventListener("submit", e => {
   e.preventDefault();
 
   status.innerText = "Submitting...";
   status.style.color = "blue";
 
+  /* ---- BUILD GUARD CAG VALUES ---- */
+  const guard1CAG = [
+    radio("g1_comm"),
+    radio("g1_awar"),
+    radio("g1_groom")
+  ].filter(Boolean).join(" ");
+
+  const guard2CAG = [
+    radio("g2_comm"),
+    radio("g2_awar"),
+    radio("g2_groom")
+  ].filter(Boolean).join(" ");
+
   const payload = {
-    action: "aqcl",
+    action: "submitAQCL",   // ✅ FIXED
+
     accName: accName.value,
     guardPosition: radio("guardPosition"),
     numGuards: numGuards.value,
@@ -99,12 +113,15 @@ form.addEventListener("submit", e => {
     apartmentInspection: apartmentInspection.value,
     apartmentRemark: apartmentRemark.value,
     actionsTaken: actionsTaken.value,
-    guard1cag: radio("g1"),
-    guard2cag: radio("g2"),
+
+    guard1CAG: guard1CAG,   // ✅ CORRECT
+    guard2CAG: guard2CAG,   // ✅ CORRECT
+
     patrollingSupervisor: patrollingSupervisor.value,
     serialNumber: serialNumber.value,
     buildingSecurityName: buildingSecurityName.value,
     securityStaffNumber: securityStaffNumber.value,
+
     signature: canvas.toDataURL(),
     buildingLandline: buildingLandline.value,
     securityDutyMobile: securityDutyMobile.value
@@ -132,22 +149,3 @@ form.addEventListener("submit", e => {
     status.style.color = "red";
   });
 });
-
-function radio(name) {
-  const r = document.querySelector(`input[name="${name}"]:checked`);
-  return r ? r.value : "";
-}
-
-const guard1CAG = [
-  radio("g1_comm"),
-  radio("g1_awar"),
-  radio("g1_groom")
-].filter(Boolean).join(" ");
-
-const guard2CAG = [
-  radio("g2_comm"),
-  radio("g2_awar"),
-  radio("g2_groom")
-].filter(Boolean).join(" ");
-
-
