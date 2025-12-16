@@ -232,8 +232,8 @@ canvas {
 .radio-box input:checked::after {
   content: "✔";
   position: absolute;
-  top: -2px;
+  top: 2px;
   left: 2px;
-  font-size: 14px;
+  font-size: 18px;
   color: #1976d2;
 }
