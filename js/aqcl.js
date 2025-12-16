@@ -95,7 +95,6 @@ function submitAQCL(e) {
     action: "aqcl",
     username: localStorage.user,
     password: localStorage.pass,
-
     accommodation: accName.value,
     guardPosition: radio("guardPosition"),
     numGuards: numGuards.value,
