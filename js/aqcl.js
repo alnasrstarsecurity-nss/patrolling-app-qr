@@ -11,6 +11,9 @@ function yn(id) {
   return document.getElementById(id).checked ? "YES" : "NO";
 }
 
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
 function submitAQCL(e) {
   e.preventDefault();
 
