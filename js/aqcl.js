@@ -1,10 +1,10 @@
 /* ===============================
    🔐 PAGE PROTECTION
 ================================ */
-if (localStorage.getItem("loggedIn") !== "YES") {
+/*if (localStorage.getItem("loggedIn") !== "YES") {
   alert("Please login first");
   location.href = "index.html";
-}
+}*/
 
 /* ===============================
    CONFIG
