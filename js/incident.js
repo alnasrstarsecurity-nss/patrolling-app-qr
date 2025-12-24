@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
 ================================ */
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxELlSWsaxSsJSyrJRg4zw/exec";
 
-const form = document.getElementById("aqclForm");
+const form = document.getElementById("incident");
 const status = document.getElementById("status");
 
 /* ===============================
