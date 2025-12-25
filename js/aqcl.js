@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 /* ===============================
    CONFIG
 ================================ */
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxELF7oYmYblpYiW_-TH0ZKoZo6krCqhzOxh3aGl-I8eN_xQOnLlSWsaxSsJSyrJRg4zw/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzbpXIi3cAUbEesls5ujfbpawZ7Dr1LepcOUJIs7bgUNT6IHTczBrsNgVC0EWxLEYyGaA/exec";
 
 const form = document.getElementById("aqclForm");
 const status = document.getElementById("status");
