@@ -13,6 +13,21 @@ body {
   padding: 12px;             /* 👈 mobile spacing */
 }
 
+.form-header {
+  background: linear-gradient(135deg, #8b2f2f, #b14a4a);
+  color: #fff;
+  padding: 24px 28px;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.form-header h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+
 /* Card */
 .form-container {
   background: #fff;
