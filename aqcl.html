@@ -83,6 +83,14 @@ document.addEventListener("DOMContentLoaded", () => {
 <option value="Duhail 52">Duhail 52</option>
 <option value="Zenon 5">Zenon 5</option>
 </select>
+  <script>
+$(document).ready(function() {
+  $('#accName').select2({
+    placeholder: "Search accommodation...",
+    allowClear: true
+  });
+});
+</script>
 </div>
 
 <!-- Guard Position -->
@@ -318,14 +326,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </form>
 </div>
-<script>
-$(document).ready(function() {
-  $('#accName').select2({
-    placeholder: "Search accommodation...",
-    allowClear: true
-  });
-});
-</script>
+
   
 <script src="js/aqcl.js"></script>
 </body>
