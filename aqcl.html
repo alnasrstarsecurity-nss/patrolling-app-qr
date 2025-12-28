@@ -9,14 +9,26 @@
   <title>Accommodation Quality Check List</title>
 
   <!-- Font -->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/js/select2.min.js"></script>
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
   <!-- CSS -->
   <link rel="stylesheet" href="css/style.css">
-
+  
   
 </head>
-
+<script>
+$(document).ready(function() {
+  $('#accName').select2({
+    placeholder: "Search accommodation...",
+    allowClear: true
+  });
+});
+</script>
+  
 <body>
   <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -42,8 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <!-- Accommodation -->
 <div class="section">
   <label><h3>Accommodation Name</h3></label>
-  <select id="accName" required>
-    <input list="accommodations" placeholder="Search accommodation">
+  <select id="accName" required style="width:100%" required>
   <option value="">-- Select Accommodation --</option>  
 <option value="Muntazah Plaza 140 A& B">Muntazah Plaza 140 A& B</option>
 <option value="QRIOC">QRIOC</option>
