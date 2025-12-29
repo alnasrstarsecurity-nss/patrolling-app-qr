@@ -191,7 +191,6 @@ form.addEventListener("submit", async e => {
   reportedBy: form.reportedBy.value,
   supSign: document.getElementById("supSignPad").toDataURL(),
 
-  reportText: ""
 };
 
 
