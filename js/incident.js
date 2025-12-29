@@ -167,7 +167,7 @@ form.addEventListener("submit", async e => {
   shift: form.shift.value,
   exactLocation: form.exactLocation.value,
   date: form.date.value,
-  time: form.time.value,
+  time: form.reporttime.value,
 
   blueplate: form.blueplate.value,
   incidentType: form.incidentType.value,
@@ -191,8 +191,9 @@ form.addEventListener("submit", async e => {
   reportedBy: form.reportedBy.value,
   supSign: document.getElementById("supSignPad").toDataURL(),
 
-  reportText: form.reportText.value
+  reportText: ""
 };
+
 
 
   fetch(SCRIPT_URL, {
