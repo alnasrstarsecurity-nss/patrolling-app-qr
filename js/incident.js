@@ -35,7 +35,19 @@ function radio(name) {
   const r = document.querySelector(`input[name="${name}"]:checked`);
   return r ? r.value : "";
 }
+/* ===============================
+   attachment HELPER
+================================ */
+function fileToBase64(fileInput) {
+  const file = fileInput.files[0];
+  return new Promise(resolve => {
+    if (!file) return resolve("");
 
+    const reader = new FileReader();
+    reader.onload = e => resolve(e.target.result);
+    reader.readAsDataURL(file);
+  });
+}
 /* ===============================
    date format
 ================================ */
@@ -138,61 +150,55 @@ window.clearSupSignature = clearSupSignature;
 /* ===============================
    FORM SUBMISSION
 ================================ */
-form.addEventListener("submit", e => {
+form.addEventListener("submit", async e => {
   e.preventDefault();
 
   status.innerText = "Submitting...";
   status.style.color = "blue";
 
- const attachmentTypes = Array.from(form.querySelectorAll('input[name="attachmentType"]:checked'))
-  .map(cb => cb.value)
-  .join(", "); 
-
-  /* ---- PAYLOAD (MATCHES APPS SCRIPT 100%) ---- */
   const payload = {
-    action: "submitIncident",
+  action: "submitIncident",
 
-      // Main info
-      name: form.name.value,
-      designation: form.designation.value,
-      empno: form.empno.value,
-      location: form.location.value,
-      contact: form.contact.value,
-      shift: form.shift.value,
-      exactLocation: form.exactLocation.value,
-      date: form.date.value,
-      time: form.time.value,
-      blueplate: form.blueplate.value,
-      incidentType: form.incidentType.value,
-      otherIncident: form.otherIncident.value,
+  name: form.name.value,
+  designation: form.designation.value,
+  empno: form.empno.value,
+  location: form.location.value,
+  contact: form.contact.value,
+  shift: form.shift.value,
+  exactLocation: form.exactLocation.value,
+  date: form.date.value,
+  time: form.time.value,
 
-      // Witness info
-      witnessName: form.witnessName.value,
-      witnessContact: form.witnessContact.value,
-      witnessSign: document.getElementById("witnessSignPad").toDataURL(),
-      briefIncident: form.briefIncident.value,
-     
-      // Attachments
-      attachmentType: attachmentTypes,
-      attach1: form.attach1.value,
-      attach2: form.attach2.value,
-      attach3: form.attach3.value,
-      attach4: form.attach4.value,
+  blueplate: form.blueplate.value,
+  incidentType: form.incidentType.value,
+  otherIncident: form.otherIncident.value,
 
-      // Reporting info
-      reportedBy: form.reportedBy.value,
-      supSign: document.getElementById("supSignPad").toDataURL(),
-      reportText: form.reportText.value,
+  witnessName: form.witnessName.value,
+  witnessContact: form.witnessContact.value,
+  witnessSign: document.getElementById("witnessSignPad").toDataURL(),
 
-  };
+  briefIncident: form.briefIncident.value,
+
+  attachmentType: Array.from(
+    form.querySelectorAll('input[name="attachmentType"]:checked')
+  ).map(c => c.value).join(", "),
+
+  attach1: await fileToBase64(form.attach1),
+  attach2: await fileToBase64(form.attach2),
+  attach3: await fileToBase64(form.attach3),
+  attach4: await fileToBase64(form.attach4),
+
+  reportedBy: form.reportedBy.value,
+  supSign: document.getElementById("supSignPad").toDataURL(),
+
+  reportText: form.reportText.value
+};
+
 
   fetch(SCRIPT_URL, {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify(payload)
-})
+    method: "POST",
+    body: JSON.stringify(payload)
+  })
     .then(r => r.json())
     .then(res => {
       if (res.status === "success") {
@@ -212,6 +218,7 @@ form.addEventListener("submit", e => {
       status.style.color = "red";
     });
 });
+
 
 /* ===============================
    LOGOUT
