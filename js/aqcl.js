@@ -77,8 +77,8 @@ function resizeCanvas() {
   canvas.width = r.width;
   canvas.height = r.height;
 }
-resizeCanvas();
-window.addEventListener("resize", resizeCanvas);
+//resizeCanvas();
+//window.addEventListener("resize", resizeCanvas);
 
 function getPos(e) {
   const r = canvas.getBoundingClientRect();
