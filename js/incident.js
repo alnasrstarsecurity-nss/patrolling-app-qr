@@ -103,6 +103,10 @@ let drawing = false;
   function startDraw(e) {
     e.preventDefault();
     drawing = true;
+
+     signed = true;
+  submitBtn.disabled = false;
+     
     const p = getPos(e);
     ctx.beginPath();
     ctx.moveTo(p.x, p.y);
