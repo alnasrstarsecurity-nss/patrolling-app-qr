@@ -60,32 +60,36 @@ function toDDMMYYYY(dateValue) {
 /* ===============================
    SIGNATURE PAD (MOUSE + TOUCH)
 ================================ */
+// CANVASES & CONTEXTS
 const witnessCanvas = document.getElementById("witnessSignPad");
 const witnessCtx = witnessCanvas.getContext("2d");
 
 const supCanvas = document.getElementById("supSignPad");
 const supCtx = supCanvas.getContext("2d");
 
+// Set line style
+witnessCtx.lineWidth = 2.5;
+witnessCtx.lineCap = "round";
 
-const submitBtn = document.getElementById("submitBtn");
-let signed = false;
+supCtx.lineWidth = 2.5;
+supCtx.lineCap = "round";
 
-// disable submit initially (safety)
-submitBtn.disabled = true;
-
-ctx.lineWidth = 2.5;
-ctx.lineCap = "round";
-
-let drawing = false;
-
-function resizeCanvas() {
+// Resize canvases
+function resizeCanvas(canvas) {
   const r = canvas.getBoundingClientRect();
   canvas.width = r.width;
   canvas.height = r.height;
 }
-//resizeCanvas();
-//window.addEventListener("resize", resizeCanvas);
 
+resizeCanvas(witnessCanvas);
+resizeCanvas(supCanvas);
+
+window.addEventListener("resize", () => {
+  resizeCanvas(witnessCanvas);
+  resizeCanvas(supCanvas);
+});
+
+// Initialize signature pad
 function initSignaturePad(canvas, ctx) {
   let drawing = false;
 
@@ -136,15 +140,13 @@ function initSignaturePad(canvas, ctx) {
 initSignaturePad(witnessCanvas, witnessCtx);
 initSignaturePad(supCanvas, supCtx);
 
-function clearSignature() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-   signed = false;
-  submitBtn.disabled = true;
-}
-
-  window.clearWitnessSignature = () => { witnessCanvas.getContext("2d").clearRect(0,0,witnessCanvas.width,witnessCanvas.height); };
-  window.clearSupSignature = () => { supCanvas.getContext("2d").clearRect(0,0,supCanvas.width,supCanvas.height); };
+// Clear buttons
+window.clearWitnessSignature = () => {
+  witnessCtx.clearRect(0, 0, witnessCanvas.width, witnessCanvas.height);
+};
+window.clearSupSignature = () => {
+  supCtx.clearRect(0, 0, supCanvas.width, supCanvas.height);
+};
 
 /* ===============================
    FORM SUBMISSION
