@@ -64,8 +64,7 @@ function initSignaturePad(canvasId) {
   const canvas = document.getElementById(canvasId);
   const ctx = canvas.getContext("2d");
 
-   const submitBtn = document.getElementById("submitBtn");
-let signed = false;
+  
 
 // disable submit initially (safety)
 submitBtn.disabled = true;
@@ -103,10 +102,6 @@ let drawing = false;
   function startDraw(e) {
     e.preventDefault();
     drawing = true;
-
-     signed = true;
-  submitBtn.disabled = false;
-     
     const p = getPos(e);
     ctx.beginPath();
     ctx.moveTo(p.x, p.y);
@@ -148,8 +143,7 @@ const clearSupSignature = initSignaturePad("supSignPad");
 // Attach clear buttons
 window.clearWitnessSignature = clearWitnessSignature;
 window.clearSupSignature = clearSupSignature;
-signed = false;
-  submitBtn.disabled = true;
+
 
 /* ===============================
    FORM SUBMISSION
