@@ -34,6 +34,12 @@ function radio(name) {
   return r ? r.value : "";
 }
 
+function resizeCanvasToDisplaySize(canvas) {
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width;
+  canvas.height = rect.height;
+}
+
 /* ===============================
    date format
 ================================ */
@@ -59,6 +65,7 @@ function toDDMMYYYY(dateValue) {
    SIGNATURE PAD (MOUSE + TOUCH)
 ================================ */
 const canvas = document.getElementById("sign");
+resizeCanvasToDisplaySize(canvas);
 const ctx = canvas.getContext("2d");
 
 const submitBtn = document.getElementById("submitBtn");
