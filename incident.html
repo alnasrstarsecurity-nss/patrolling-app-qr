@@ -116,13 +116,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
    <label>Contact Number</label>
   <input type="witnessnumber" id="Contactno">
-  </div>
 
-  <div class="section">
-    <label>Exact Location of Incdent</label>
-    <textarea id="Location2"></textarea>
+    <div class="section">
+  <label>Signature</label>
+  <canvas id="wsign"></canvas>
+  
+  <button type="button" class="secondary" onclick="clearSignature()">Clear Signature</button>
+</div>
 
-  </div>
+
   <div class="section">
     <label>Attachments</label>
    <label class="check-box">
