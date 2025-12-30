@@ -27,7 +27,7 @@
 </div>
 
 <script>
-if (localStorage.getItem("LOGGED_IN") === "YES") {
+if (sessionStorage.getItem("LOGGED_IN") === "YES") {
   window.location.replace("menu.html");
 }
   
@@ -62,8 +62,8 @@ function login() {
   .then(r => r.json())
   .then(res => {
   if (res.status === "success") {
-  localStorage.setItem("LOGGED_IN", "YES");
-  localStorage.setItem("USERNAME", user.value);
+  sessionStorage.setItem("LOGGED_IN", "YES");
+  sessionStorage.setItem("USERNAME", user.value);;
 
   // 🔒 ensure storage is written before redirect
   setTimeout(() => {
