@@ -315,4 +315,11 @@ canvas {
   width: 18px;
   height: 18px;
 }
+
+.check label {
+  display: inline-flex;
+  align-items: center;   /* keeps checkbox + text perfectly aligned */
+  gap: 6px;              /* small spacing */
+  cursor: pointer;
+}
 //incident form style 
