@@ -20,6 +20,13 @@
 
   
 <body>
+
+    <script>
+/* 🔒 Block direct access without login */
+if (sessionStorage.getItem("LOGGED_IN") !== "YES") {
+  window.location.replace("index.html");
+}
+</script>
 <script>
 /* Always force login page */
 sessionStorage.clear();
