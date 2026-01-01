@@ -157,11 +157,17 @@ function initSignaturePad(canvasId) {
 
   // Clear function
   return () => ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+   //validation
+    if (options.required) {
+      submitBtn.disabled = true;
+    }
+   //validation
 }
 
 // Initialize both pads
 const clearWitnessSignature = initSignaturePad("witnessSignPad");
-const clearSupSignature = initSignaturePad("supSignPad");
+const clearSupSignature = initSignaturePad("supSignPad", { required: true });
 
 // Attach clear buttons
 window.clearWitnessSignature = clearWitnessSignature;
