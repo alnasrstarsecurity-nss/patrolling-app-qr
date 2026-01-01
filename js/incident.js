@@ -83,7 +83,7 @@ function initSignaturePad(canvasId) {
   const ctx = canvas.getContext("2d");
 
     const submitBtn = document.getElementById("submitBtn");
-    let signed = false;
+    
 
   // Make canvas internal size match CSS
   const rect = canvas.getBoundingClientRect();
