@@ -1,24 +1,3 @@
-
-/* ===============================
-   🔐 PAGE PROTECTION
-================================ 
-function requireLogin() {
-  if (sessionStorage.getItem("LOGGED_IN") !== "YES") {
-    window.location.replace("index.html");
-  }
-}
-
-requireLogin();
-
-document.addEventListener("DOMContentLoaded", () => {
-  const loginState = localStorage.getItem("LOGGED_IN");
-  console.log("AQCL LOGIN STATE =", loginState);
-
-  if ((loginState || "").toUpperCase() !== "YES") {
-    window.location.replace("index.html");
-  }
-});*/
-
 /* ===============================
    CONFIG
 ================================ */
