@@ -305,7 +305,7 @@ canvas {
   align-items: center;
   gap: 8px;
   margin: 0;
-  font-weight: 300;
+  font-weight: 500;
 }
 
 .check-row input[type="checkbox"] {
@@ -316,6 +316,6 @@ canvas {
 
 .check-row span {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 400;
 }
 /*incident form style */
