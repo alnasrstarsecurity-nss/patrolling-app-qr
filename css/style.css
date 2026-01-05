@@ -254,7 +254,8 @@ canvas {
   /*border: 2px solid #1976d2;*/
   border-radius: 3px;
   position: relative;
-  color:FFFFFF
+  background-color: #ffffff; 
+  -webkit-appearance: none;
 }
 
 .radio-box input:checked::after {
