@@ -237,6 +237,8 @@ canvas {
   align-items: center;
   gap: 22px;
   margin-top: 1px;
+   display: grid;
+  row-gap: 12px;
 }
 
 .radio-box {
