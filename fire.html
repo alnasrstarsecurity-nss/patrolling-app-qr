@@ -258,11 +258,35 @@ if (sessionStorage.getItem("LOGGED_IN") !== "YES") {
        <label class="radio-box">Yes<input type="radio" name="Injury" value="Yes"></label>
        <label class="radio-box">No<input type="radio" name="Injury" value="No"></label>
        </div>
+
+         <label>Description of the Incident</label>
+         <textarea id="DescriptionIncident"></textarea>
+
+         <label>Cause of the incident</label>
+         <textarea id="Cause"></textarea>
+
+
+       <div class="yesno">
+        <label style="font-weight: bold;">Any Property Damage :</label>    
+       <label class="radio-box">Yes<input type="radio" name="Damage" value="Yes"></label>
+       <label class="radio-box">No<input type="radio" name="Damage" value="No"></label>
+       </div>
+
+         <label>If yes please Specify</label>
+         <textarea id="SpecifyDamage"></textarea>
+
+          <label>Action taken/observations by the guard</label>
+         <textarea id="Actiontaken"></textarea>
          
      </div>
 
   
-       
+       <div class="section">
+         <h3>Other Information</h3>
+        
+         
+       </div>  
+         
   
    
 ____________________________________________________________________________________________________________________________________
