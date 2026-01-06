@@ -28,27 +28,19 @@ body {
 }
 
 
-/* Card 
+ Card 
 .form-container {
   background: #fff;
   width: 100%;
-  max-width: 720px;   /* Wider on desktop 
+  max-width: 720px;   /* Wider on desktop */
   padding: 20px;
   border-radius: 14px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
   min-height: 80vh;
-}*/
-
-.form-container{
-  background: white;
-  width: 100%;
-  max-width: 720px;   /* Wider on desktop */
-  padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
 }
+
 
 hr {
   border: none;
