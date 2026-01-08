@@ -88,7 +88,7 @@ form.addEventListener("submit", e => {
         status.innerText = "✅ Submitted Successfully";
         status.style.color = "green";
         form.reset();
-        setTimeout(() => status.innerText = "", 3000);
+        setTimeout(() => status.innerText = "", 3500);
       } else {
         status.innerText = "❌ Submission Failed";
         status.style.color = "red";
