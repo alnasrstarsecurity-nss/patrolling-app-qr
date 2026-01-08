@@ -1,8 +1,7 @@
-const FIRE_SCRIPT_URL ="https://script.google.com/macros/s/AKfycbwVvb1Y3Bd4W0mY-lWGbfu3p65klElo0PoMQnzjqfTBR2DokwQ-qZdf39YEfvjfroAxBA/exec";
+const FIRE_SCRIPT_URL ="https://script.google.com/macros/s/AKfycbxQy8VAfUC3LnSyIuBeEbX6B_Qa67pk-gp4bZAuBn_4Sx8R5wArw5z1x0xSQcvPOGax9Q/exec";
 
 const form = document.getElementById("fireForm");
 const status = document.getElementById("status");
-const submitBtn = form.querySelector('button[type="submit"]');
 
 function radio(name) {
   const r = document.querySelector(`input[name="${name}"]:checked`);
@@ -18,10 +17,6 @@ function getCheckedValues(name) {
 form.addEventListener("submit", e => {
   e.preventDefault();
 
-  
-  submitBtn.disabled = true;
-  submitBtn.innerText = "Submitting...";
-  
   status.innerText = "Submitting...";
   status.style.color = "blue";
 
@@ -87,29 +82,20 @@ form.addEventListener("submit", e => {
     method: "POST",
     body: JSON.stringify(payload)
   })
-  .then(res => {
-  if (res.status === "success") {
-    status.innerText = "✅ Submitted Successfully";
-    status.style.color = "green";
-
-    form.reset();
-
-    setTimeout(() => {
-      status.innerText = "";
-      submitBtn.disabled = false;
-      submitBtn.innerText = "Submit";
-    }, 2500);
-  } else {
-  status.innerText = "❌ Submission Failed";
-  status.style.color = "red";
-  submitBtn.disabled = false;
-  submitBtn.innerText = "Submit";
-}
+    .then(r => r.json())
+    .then(res => {
+      if (res.status === "success") {
+        status.innerText = "✅ Submitted Successfully";
+        status.style.color = "green";
+        form.reset();
+        setTimeout(() => status.innerText = "", 3000);
+      } else {
+        status.innerText = "❌ Submission Failed";
+        status.style.color = "red";
+      }
     })
     .catch(err => {
       status.innerText = "❌ Network Error";
       status.style.color = "red";
-      submitBtn.disabled = false;
-      submitBtn.innerText = "Submit";
     });
 });
