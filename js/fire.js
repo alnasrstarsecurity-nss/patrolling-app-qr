@@ -2,6 +2,7 @@ const FIRE_SCRIPT_URL ="https://script.google.com/macros/s/AKfycbxQy8VAfUC3LnSyI
 
 const form = document.getElementById("fireForm");
 const status = document.getElementById("status");
+const submitBtn = form.querySelector('button[type="submit"]');
 
 function radio(name) {
   const r = document.querySelector(`input[name="${name}"]:checked`);
@@ -17,6 +18,10 @@ function getCheckedValues(name) {
 form.addEventListener("submit", e => {
   e.preventDefault();
 
+  
+  submitBtn.disabled = true;
+  submitBtn.innerText = "Submitting...";
+  
   status.innerText = "Submitting...";
   status.style.color = "blue";
 
