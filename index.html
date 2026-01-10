@@ -36,7 +36,7 @@ if (sessionStorage.getItem("LOGGED_IN") === "YES") {
   window.location.replace("menu.html");
 }
   
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxlQZH8PwIK_W3lXDzVOrs1eMBpjuB9vvUhN4nrgKVXIIqUoSY-o7SdBzpefR2ZT6DIWg/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzuRPXYnpKeL4IpdSVeUugvB4DPec_shsw0dQLuPHopo882l6AFUG6ZAqwWpNjWw-INUw/exec";
 
 const msg = document.getElementById("msg");
 const loginBtn = document.getElementById("loginBtn");
@@ -65,11 +65,10 @@ function login() {
     })
   })
   .then(r => r.json())
-  .then(res => { console.log("LOGIN RESPONSE:", res);
+  .then(res => {
   if (res.status === "success") {
   sessionStorage.setItem("LOGGED_IN", "YES");
-  sessionStorage.setItem("USERNAME", user.value);
-  sessionStorage.setItem("LOGIN_NAME", res.name);
+  sessionStorage.setItem("USERNAME", user.value);;
 
   // 🔒 ensure storage is written before redirect
   setTimeout(() => {
