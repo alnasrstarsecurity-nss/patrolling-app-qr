@@ -5,6 +5,7 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyxTsoqsFxIkibax2vmY
 
 const form = document.getElementById("incidentform");
 const status = document.getElementById("status");
+const submitBtn = form.querySelector('button[type="submit"]');
 
 //signature validation
 const submitBtn = document.getElementById("submitBtn");
