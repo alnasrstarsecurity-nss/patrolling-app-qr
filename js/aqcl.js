@@ -6,6 +6,17 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzuRPXYnpKeL4IpdSVeU
 const form = document.getElementById("aqclForm");
 const status = document.getElementById("status");
 
+
+/* ===============================
+   user full name
+================================ */
+const loginName = sessionStorage.getItem("LOGIN_NAME");
+const ps = document.getElementById("patrollingSupervisor");
+
+ps.value = loginName || "";
+ps.readOnly = true;   // user cannot type
+ps.disabled = false;  // still submits value
+
 /* ===============================
    RADIO HELPER
 ================================ */
