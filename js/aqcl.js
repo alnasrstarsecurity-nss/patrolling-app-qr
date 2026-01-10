@@ -11,8 +11,15 @@ const status = document.getElementById("status");
    user full name
 ================================ */
 const loginName = sessionStorage.getItem("LOGIN_NAME");
-patrollingSupervisor.value = loginName;
-patrollingSupervisor.readOnly = true;
+
+if (!loginName) {
+  alert("Session expired. Please login again.");
+  location.href = "index.html";
+}
+
+const supField = document.getElementById("patrollingSupervisor");
+supField.value = loginName;
+supField.readOnly = true; 
 
 /* ===============================
    RADIO HELPER
