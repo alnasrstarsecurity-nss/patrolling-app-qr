@@ -5,7 +5,7 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyxTsoqsFxIkibax2vmY
 
 const form = document.getElementById("incidentform");
 const status = document.getElementById("status");
-const submitBtn = form.querySelector('button[type="submit"]');
+
 
 //signature validation
 const submitBtn = document.getElementById("submitBtn");
@@ -154,7 +154,7 @@ window.clearSupSignature = clearSupSignature;
 ================================ */
 form.addEventListener("submit", async e => {
   e.preventDefault();
-   submitBtn.disabled = true;
+   
 
   status.innerText = "Submitting...";
   status.style.color = "blue";
@@ -208,7 +208,7 @@ form.addEventListener("submit", async e => {
         status.innerText = "✅ Submitted Successfully";
         status.style.color = "green";
         form.reset();
-         submitBtn.disabled = false;
+         
         clearWitnessSignature();
         clearSupSignature();
         setTimeout(() => status.innerText = "", 3000);
