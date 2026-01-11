@@ -9,17 +9,16 @@ const status = document.getElementById("status");
 
 /* ===============================
    user full name
-================================ 
+================================ */
 const loginName = sessionStorage.getItem("LOGIN_NAME");
 
 if (!loginName) {
   alert("Session expired. Please login again.");
-  location.href = "index.html";
+  window.location.replace("index.html");
 }
 
-const supField = document.getElementById("patrollingSupervisor");
-supField.value = loginName;
-supField.readOnly = true; */
+// 🔹 Auto-fill supervisor name
+document.getElementById("patrollingSupervisor").value = loginName;
 
 /* ===============================
    RADIO HELPER
