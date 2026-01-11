@@ -45,7 +45,7 @@ loginBtn.addEventListener("click", login);
 
 function login() {
   const username = user.value.trim();
-  const password = pass.value;
+  const password = pass.value.trim();
 
   if (!username || !password) {
     msg.innerText = "⚠️ Enter username and password";
@@ -61,23 +61,20 @@ function login() {
     body: JSON.stringify({
       action: "login",
       username: username,
-      password: password   // plain password → hashed in Apps Script
+      password: password
     })
   })
+  .then(r => r.json())
   .then(res => {
-  console.log("LOGIN RESPONSE:", res);
-
-  if (res.status === "success") {
-    sessionStorage.setItem("LOGGED_IN", "YES");
-    sessionStorage.setItem("USERNAME", username);
-    sessionStorage.setItem("LOGIN_NAME", res.name);
-
-    window.location.replace("menu.html");
-  } else {
-    msg.innerText = "❌ Wrong username or password";
-    msg.className = "message error";
-  }
-})
+    if (res.status === "success") {
+      sessionStorage.setItem("LOGGED_IN", "YES");
+      sessionStorage.setItem("LOGIN_NAME", res.name);
+      window.location.replace("menu.html");
+    } else {
+      msg.innerText = "❌ Wrong username or password";
+      msg.className = "message error";
+    }
+  })
   .catch(() => {
     msg.innerText = "⚠️ Server error";
     msg.className = "message error";
