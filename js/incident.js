@@ -13,6 +13,19 @@ submitBtn.disabled = true;
 //signature validation
 
 /* ===============================
+   user full name
+================================ */
+const loginName = sessionStorage.getItem("LOGIN_NAME");
+
+if (!loginName) {
+  alert("Session expired. Please login again.");
+  window.location.replace("index.html");
+}
+
+// 🔹 Auto-fill supervisor name
+document.getElementById("patrollingSupervisor").value = loginName;
+
+/* ===============================
    RADIO HELPER
 ================================ */
 function radio(name) {
