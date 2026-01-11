@@ -1,7 +1,7 @@
 /* ===============================
    CONFIG
 ================================ */
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzOPRIwkCopNqE4aX65X527GKU-mZ6q1ddpcXFlDh0EqkHjgcbKFKNnhpeuBtLu5qqM/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzpNZttv36NQTE2X_mMP13MwcDriYp4mdg6zA-uoHfGLj3Za3u0vGDrW6Kvmd3Rr2aawg/exec";
 
 const form = document.getElementById("aqclForm");
 const status = document.getElementById("status");
