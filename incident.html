@@ -42,12 +42,8 @@ if (sessionStorage.getItem("LOGGED_IN") !== "YES") {
 <div class="section">
   <h3>Reporter's Details</h3>
   <label>Name</label>
-  <select id="name" name="name">
-  <option value="">-- Name --</option>  
-<option value="AAAAA">AAAAA</option>
-<option value="BBBBB">BBBBB</option>
-<option value="CCCCC">CCCCC</option>
-</select>
+  <input type="text" id="name" name="name">
+
 
    <label>Designation</label>
   <select id="designation" name="designation">
@@ -121,7 +117,7 @@ if (sessionStorage.getItem("LOGGED_IN") !== "YES") {
   <input type="time" id="reporttime" name="reporttime">
 
    <label>Blue Plate</label>
-  <textarea id="blueplate" name="blueplate"></textarea>
+  <input type="text" id="blueplate" name="blueplate">
 
       <label>Type of Incident</label>
   <select id="incidentType" name="incidentType">
