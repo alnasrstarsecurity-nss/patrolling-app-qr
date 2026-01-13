@@ -42,11 +42,11 @@ if (sessionStorage.getItem("LOGGED_IN") !== "YES") {
 <div class="section">
   <h3>Reporter's Details</h3>
   <label>Name</label>
-  <input type="text" id="name" name="name">
+  <input type="text" id="name" name="name" required>
 
 
    <label>Designation</label>
-  <select id="designation" name="designation">
+  <select id="designation" name="designation" required>
   <option value="">-- Designation --</option>  
 <option value="Project Manager">Project Manager</option>
 <option value="patrolling supervisor">patrolling supervisor</option>
@@ -54,10 +54,10 @@ if (sessionStorage.getItem("LOGGED_IN") !== "YES") {
 
 
   <label>Employee Number</label>
-  <input type="number" id="empno" name="empno" >
+  <input type="number" id="empno" name="empno" required>
 
    <label>Location</label>
-  <select id="location" name="location">
+  <select id="location" name="location" required>
   <option value="">-- Location --</option>  
   <option value="Muntazah Plaza 140 A& B">Muntazah Plaza 140 A& B</option>
 <option value="QRIOC">QRIOC</option>
@@ -95,10 +95,10 @@ if (sessionStorage.getItem("LOGGED_IN") !== "YES") {
   </select>
 
    <label>Contact Number</label>
-  <input type="number" id="contact" name="contact">
+  <input type="number" id="contact" name="contact" required>
 
    <label>Shift</label>
-  <select id="shift" name="shift">
+  <select id="shift" name="shift" required>
   <option value="">-- Shift --</option>  
   <option value="Morning">Morning</option>
   <option value="Night">Night</option>
@@ -108,19 +108,19 @@ if (sessionStorage.getItem("LOGGED_IN") !== "YES") {
   <div class="section">
     <h3>Described The Incident</h3>
    <label>Exact Location of Incdent</label>
-  <textarea id="exactLocation" name="exactLocation"></textarea>
+  <textarea id="exactLocation" name="exactLocation" required></textarea >
     
   <label>Date</label>
-  <input type="date" id="date" name="date">
+  <input type="date" id="date" name="date" required>
 
   <label for="time">Time</label>
-  <input type="time" id="reporttime" name="reporttime">
+  <input type="time" id="reporttime" name="reporttime" required>
 
    <label>Blue Plate</label>
-  <input type="text" id="blueplate" name="blueplate">
+  <input type="text" id="blueplate" name="blueplate" required>
 
       <label>Type of Incident</label>
-  <select id="incidentType" name="incidentType">
+  <select id="incidentType" name="incidentType" required>
   <option value="">-- Select Incident --</option>  
   <option value="Medical Emergency">Medical Emergency</option>
   <option value="Electrical Failure">Electrical Failure</option>
@@ -157,7 +157,7 @@ if (sessionStorage.getItem("LOGGED_IN") !== "YES") {
     <div class="section">
       <h3>Brief description of incident</h3>
    
-     <textarea id="briefIncident" name="briefIncident"></textarea>
+     <textarea id="briefIncident" name="briefIncident" required></textarea>
       </div>
 
   <div class="section">
