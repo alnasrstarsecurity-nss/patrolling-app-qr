@@ -235,6 +235,8 @@ form.addEventListener("submit", e => {
         status.innerText = "✅ Submitted Successfully";
         status.style.color = "green";
         form.reset();
+         document.getElementById("patrollingSupervisor").value = loginName;
+         document.getElementById("serialNumber").value = qaidnumber;
         clearAqclSignature();
         setTimeout(() => status.innerText = "", 3000);
       } else {
