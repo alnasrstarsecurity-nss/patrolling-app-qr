@@ -333,75 +333,56 @@ canvas {
   font-weight: 400;
 }
 
-.upload-block {
-  margin: 18px 0;
-}
-
-.upload-label {
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: #374151;
-}
-
-.upload-drop {
-  border: 2px dashed #cbd5e1;
-  border-radius: 12px;
-  padding: 16px;
-  text-align: center;
-  color: #596277;
-  cursor: pointer;
-  transition: 0.2s;
+.upload-card {
   background: #ffffff;
-}
-
-.upload-drop:hover {
-  border-color: #8b2d2d;
-  background: #faf5f5;
-}
-
-.upload-preview {
+  border: 1px solid #d1d5db;
+  padding: 14px 16px;
+  border-radius: 12px;
+  margin: 12px 0;
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 8px;
-}
-
-.preview-item {
-  position: relative;
-}
-
-.preview-item img,
-.preview-item .file-icon {
-  width: 68px;
-  height: 68px;
-  border-radius: 8px;
-  object-fit: cover;
-  background: #e5e7eb;
-  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: 24px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
 }
 
-.delete-btn {
-  position: absolute;
-  top: -7px;
-  right: -7px;
-  background: #b91c1c;
-  color: white;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  font-size: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.upload-info {
-  margin-top: 6px;
-  font-size: 13px;
+.upload-left {
+  font-size: 15px;
   font-weight: 500;
-  color: #8b2d2d;
+  color: #374151;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.upload-btn {
+  background: #e5e7eb;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+  cursor: pointer;
+  border: 1px solid #cfd3d8;
+  transition: 0.15s ease-in-out;
+}
+
+.upload-btn:hover {
+  background: #dcdfe3;
+}
+
+.upload-btn input {
+  display: none; /* hides actual file input */
+}
+
+@media (max-width: 600px) {
+  .upload-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .upload-btn {
+    width: 100%;
+    text-align: center;
+  }
 }
