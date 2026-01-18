@@ -344,16 +344,14 @@ canvas {
 }
 
 .upload-drop {
-  background: #ffffff;
   border: 2px dashed #cbd5e1;
-  border-radius: 14px;
-  padding: 18px;
+  border-radius: 12px;
+  padding: 16px;
   text-align: center;
   color: #596277;
   cursor: pointer;
   transition: 0.2s;
-  font-size: 14px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+  background: #ffffff;
 }
 
 .upload-drop:hover {
@@ -365,20 +363,40 @@ canvas {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
-.upload-preview img,
-.upload-preview .file-icon {
-  width: 70px;
-  height: 70px;
-  border-radius: 10px;
+.preview-item {
+  position: relative;
+}
+
+.preview-item img,
+.preview-item .file-icon {
+  width: 68px;
+  height: 68px;
+  border-radius: 8px;
   object-fit: cover;
   background: #e5e7eb;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 26px;
+  font-size: 24px;
+}
+
+.delete-btn {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  background: #b91c1c;
+  color: white;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
 .upload-info {
@@ -387,4 +405,3 @@ canvas {
   font-weight: 500;
   color: #8b2d2d;
 }
-
