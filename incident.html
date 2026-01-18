@@ -188,13 +188,44 @@ if (sessionStorage.getItem("LOGGED_IN") !== "YES") {
       
 
     <div class="section">
-     <h3>Attachments</h3> <br>
-    <label>Upload Images-Up to 10 Images</label><input type="file" input id="attach1" name="attach1" multiple accept="image/*">
+  <h3>Attachments</h3>
+
+  <!-- IMAGES -->
+  <div class="upload-block">
+      <div class="upload-label">📸 Images (10 max)</div>
+      <input type="file" id="attach1" multiple accept="image/*">
+      <div class="upload-drop" data-for="attach1">Tap to upload or drag files</div>
+      <div class="upload-info" id="attach1-info"></div>
+      <div class="upload-preview" id="attach1-preview"></div>
+  </div>
       <small id="attach1Error" style="color:red;"></small>
-    <label>Upload File 1</label><input type="file" input id="attach2" name="attach2" accept="image/*,application/pdf">
-    <label>Upload File 2</label><input type="file" input id="attach3" name="attach3" accept="image/*,application/pdf">
-    <label>Upload File 3</label><input type="file" input id="attach4" name="attach4" accept="image/*,application/pdf">
-    </div>
+   <div class="upload-block">
+      <div class="upload-label">📄 Upload File 1</div>
+      <input type="file" id="attach2" accept="image/*,application/pdf">
+      <div class="upload-drop" data-for="attach2">Tap to upload file</div>
+      <div class="upload-info" id="attach2-info"></div>
+      <div class="upload-preview" id="attach2-preview"></div>
+  </div>
+
+  <!-- FILE 2 -->
+  <div class="upload-block">
+      <div class="upload-label">📄 Upload File 2</div>
+      <input type="file" id="attach3" accept="image/*,application/pdf">
+      <div class="upload-drop" data-for="attach3">Tap to upload file</div>
+      <div class="upload-info" id="attach3-info"></div>
+      <div class="upload-preview" id="attach3-preview"></div>
+  </div>
+
+  <!-- FILE 3 -->
+  <div class="upload-block">
+      <div class="upload-label">📄 Upload File 3</div>
+      <input type="file" id="attach4" accept="image/*,application/pdf">
+      <div class="upload-drop" data-for="attach4">Tap to upload file</div>
+      <div class="upload-info" id="attach4-info"></div>
+      <div class="upload-preview" id="attach4-preview"></div>
+  </div>
+</div>
+
 
   
     <label>Prepared and Reported by</label>
