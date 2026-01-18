@@ -46,15 +46,46 @@ incidentType.addEventListener("change", function () {
 const MAX_IMAGES = 10;
 const attach1Input = document.getElementById("attach1");
 const attach1Error = document.getElementById("attach1Error");
+const thumbPreview = document.getElementById("thumbPreview");
+let selectedImages = [];
 
 attach1Input.addEventListener("change", function () {
-  if (this.files.length > MAX_IMAGES) {
+  const newFiles = Array.from(this.files);
+
+  if (selectedImages.length + newFiles.length > MAX_IMAGES) {
     attach1Error.textContent = `⚠️ Maximum ${MAX_IMAGES} images allowed`;
-    this.value = ""; // clear selection
-  } else {
-    attach1Error.textContent = "";
+    return;
   }
+
+  attach1Error.textContent = "";
+
+  newFiles.forEach(file => {
+    selectedImages.push(file);
+
+    const reader = new FileReader();
+    reader.onload = e => {
+      const div = document.createElement("div");
+      div.className = "thumb-item";
+
+      div.innerHTML = `
+        <img src="${e.target.result}">
+        <button class="thumb-del">×</button>
+      `;
+
+      div.querySelector(".thumb-del").onclick = () => {
+        selectedImages = selectedImages.filter(f => f !== file);
+        div.remove();
+      };
+
+      thumbPreview.appendChild(div);
+    };
+    reader.readAsDataURL(file);
+  });
+
+  // allow reselect same file name again
+  this.value = "";
 });
+
 
 //upload block
 
@@ -250,7 +281,18 @@ form.addEventListener("submit", async e => {
     form.querySelectorAll('input[name="attachmentType"]:checked')
   ).map(c => c.value).join(", "),
 
-  attach1: await filesToBase64(form.attach1, 10),
+  attach1: await (async () => {
+  const out = [];
+  for (const file of selectedImages) {
+    const base64 = await new Promise(res => {
+      const r = new FileReader();
+      r.onload = e => res(e.target.result);
+      r.readAsDataURL(file);
+    });
+    out.push(base64);
+  }
+  return out;
+})(),
   attach2: await fileToBase64(form.attach2),
   attach3: await fileToBase64(form.attach3),
   attach4: await fileToBase64(form.attach4),
