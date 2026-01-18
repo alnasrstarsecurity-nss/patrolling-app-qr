@@ -41,6 +41,21 @@ incidentType.addEventListener("change", function () {
 });
 //other incident
 /* ===============================
+   MAX_IMAGES  10
+================================ */
+const MAX_IMAGES = 10;
+const attach1Input = document.getElementById("attach1");
+const attach1Error = document.getElementById("attach1Error");
+
+attach1Input.addEventListener("change", function () {
+  if (this.files.length > MAX_IMAGES) {
+    attach1Error.textContent = `⚠️ Maximum ${MAX_IMAGES} images allowed`;
+    this.value = ""; // clear selection
+  } else {
+    attach1Error.textContent = "";
+  }
+});
+/* ===============================
    RADIO HELPER
 ================================ */
 function radio(name) {
