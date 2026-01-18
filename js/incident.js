@@ -56,60 +56,7 @@ attach1Input.addEventListener("change", function () {
   }
 });
 
-const state = {
-  attach1: [],
-  attach2: [],
-  attach3: [],
-  attach4: []
-};
 
-function render(id) {
-  const preview = document.getElementById(id+"-preview");
-  const info = document.getElementById(id+"-info");
-  preview.innerHTML = "";
-  info.innerText = state[id].length ? `${state[id].length} file(s) selected` : "";
-
-  state[id].forEach((file, i) => {
-    const item = document.createElement("div");
-    item.className = "preview-item";
-
-    if (file.type.startsWith("image/")) {
-      const img = document.createElement("img");
-      img.src = URL.createObjectURL(file);
-      item.appendChild(img);
-    } else {
-      const icon = document.createElement("div");
-      icon.className = "file-icon";
-      icon.innerText = "📄";
-      item.appendChild(icon);
-    }
-
-    const del = document.createElement("div");
-    del.className = "delete-btn";
-    del.innerText = "×";
-    del.onclick = () => {
-      state[id].splice(i,1);
-      render(id);
-    };
-    item.appendChild(del);
-
-    preview.appendChild(item);
-  });
-}
-
-["attach1","attach2","attach3","attach4"].forEach(id => {
-  const input = document.getElementById(id);
-  const drop = document.querySelector(`[data-for="${id}"]`);
-
-  drop.onclick = () => input.click();
-
-  input.onchange = () => {
-    const newFiles = [...input.files];
-    state[id].push(...newFiles);
-    input.value = ""; // allow re-select without clearing
-    render(id);
-  };
-});
 /* ===============================
    RADIO HELPER
 ================================ */
