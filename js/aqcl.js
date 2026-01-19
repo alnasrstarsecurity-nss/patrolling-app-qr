@@ -262,6 +262,15 @@ form.addEventListener("submit", e => {
     guard1CAG: guard1CAG,
     guard2CAG: guard2CAG,
 
+    attachmentType: Array.from(
+    form.querySelectorAll('input[name="attachmentType"]:checked')
+  ).map(c => c.value).join(", "),
+
+  attach1: await filesToBase64(form.attach1, 10),
+  attach2: await fileToBase64(form.attach2),
+  attach3: await fileToBase64(form.attach3),
+  attach4: await fileToBase64(form.attach4),
+
     patrollingSupervisor: patrollingSupervisor.value,
     serialNumber: serialNumber.value,
     buildingSecurityName: buildingSecurityName.value,
