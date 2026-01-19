@@ -300,6 +300,16 @@ if (sessionStorage.getItem("LOGGED_IN") !== "YES") {
   <input type="number" id="securityDutyMobile" required>
 </div>
 
+  <div class="section">
+  <h3>Attachments</h3>
+
+      <label>📸Upload Images (10 max)</label><input type="file" input id="attach1" name="attach1" accept="image/*" multiple>
+      <small id="attach1Error" style="color:red;"></small>
+      <label>📄Upload file 1</label><input type="file" input id="attach2" name="attach2" accept="image/*,application/pdf">
+    <label>📄Upload file 2</label><input type="file" input id="attach3" name="attach3" accept="image/*,application/pdf">
+    <label>📄Upload file 3</label><input type="file" input id="attach4" name="attach4" accept="image/*,application/pdf">
+    </div>
+
 <!-- SIGNATURE -->
 <div class="section">
   <label>Signature</label>
