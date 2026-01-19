@@ -70,11 +70,11 @@ const alarmChecks = document.querySelectorAll('input[name="AlarmActivated"]');
 const alarmError = document.getElementById("alarmError");
 
 form.addEventListener("submit", function (e) {
+  e.preventDefault(); // ✅ ALWAYS STOP native submit
+
   const checked = Array.from(alarmChecks).some(cb => cb.checked);
 
   if (!checked) {
-    e.preventDefault();                 // stop submit
-    e.stopImmediatePropagation();       // ⛔ STOP other submit handlers
     alarmError.style.display = "block";
     alarmChecks[0].focus();
     return;
