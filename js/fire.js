@@ -64,6 +64,29 @@ damageRadios.forEach(radio => {
   });
 });
 //specify damage
+
+/* ===============================
+   Cause → Others mandatory logic
+================================ */
+
+const causeSelect = document.getElementById("Cause");
+const otherIncident = document.getElementById("OtherIncident");
+
+// Ensure hidden on load
+otherIncident.style.display = "none";
+otherIncident.required = false;
+
+causeSelect.addEventListener("change", () => {
+  if (causeSelect.value === "Others") {
+    otherIncident.style.display = "block";
+    otherIncident.required = true;
+  } else {
+    otherIncident.style.display = "none";
+    otherIncident.required = false;
+    otherIncident.value = ""; // clear when not needed
+  }
+});
+
 //alarm activated mandatory
 // ✅ Alarm Activated – at least one required
 const alarmChecks = document.querySelectorAll('input[name="AlarmActivated"]');
