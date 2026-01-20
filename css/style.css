@@ -259,8 +259,8 @@ canvas {
 
 .radio-box input {
   appearance: none;
-  width: 12px;
-  height: 12px;
+  width: 8px;
+  height: 8px;
   border: 2px solid #5E5E5E;
   /*border: 2px solid #1976d2;*/
   border-radius: 3px;
