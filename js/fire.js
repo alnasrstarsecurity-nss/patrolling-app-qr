@@ -53,11 +53,16 @@ async function filesToBase64(fileInput, maxFiles = 10) {
 const damageRadios = document.querySelectorAll('input[name="Damage"]');
 const specifyDamage = document.getElementById("SpecifyDamage");
 
+specifyDamage.style.display = "none";
+specifyDamage.required = false;
+
 damageRadios.forEach(radio => {
   radio.addEventListener("change", () => {
     if (radio.value === "Yes" && radio.checked) {
       specifyDamage.required = true;
+       specifyDamage.style.display = "block";
     } else if (radio.value === "No" && radio.checked) {
+       specifyDamage.style.display = "none";
       specifyDamage.required = false;
       specifyDamage.value = ""; // optional: clear field
     }
