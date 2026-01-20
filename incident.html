@@ -42,7 +42,7 @@ if (sessionStorage.getItem("LOGGED_IN") !== "YES") {
 <div class="section">
   <h3>Reporter's Details</h3>
   <label>Name</label>
-  <input type="text" id="name" name="name" required>
+  <input type="text" id="name" name="name" maxlength="35" required>
 
 
    <label>Designation</label>
@@ -54,7 +54,7 @@ if (sessionStorage.getItem("LOGGED_IN") !== "YES") {
 
 
   <label>Employee Number</label>
-  <input type="number" id="empno" name="empno" maxlength="36" required>
+  <input type="number" id="empno" name="empno" maxlength="6" required>
 
    <label>Location</label>
   <select id="location" name="location" required>
