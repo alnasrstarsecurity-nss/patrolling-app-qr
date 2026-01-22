@@ -97,6 +97,28 @@ async function filesToBase64(fileInput, maxFiles = 10) {
 }
 
 /* ===============================
+  Limit character
+================================ */
+document.addEventListener("input", function (e) {
+  const el = e.target;
+
+  /* 🔹 NUMBER inputs → digit limit */
+  if (el.tagName === "INPUT" && el.type === "number" && el.dataset.maxdigits) {
+    let value = el.value.replace(/\D/g, "");
+    el.value = value.slice(0, el.dataset.maxdigits);
+  }
+
+  /* 🔹 TEXT inputs + TEXTAREA → character limit */
+  if (
+    (el.tagName === "INPUT" && el.type === "text") ||
+    el.tagName === "TEXTAREA"
+  ) {
+    if (el.dataset.maxchars) {
+      el.value = el.value.slice(0, el.dataset.maxchars);
+    }
+  }
+});
+/* ===============================
    date format
 ================================ */
 function toDDMMYYYY(dateValue) {
