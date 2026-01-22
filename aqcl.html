@@ -91,20 +91,20 @@ if (sessionStorage.getItem("LOGGED_IN") !== "YES") {
        </div>
 
   <label>Number of guards</label>
-  <input type="number" id="numGuards" required>
+  <input type="number" id="numGuards" data-maxdigits="3" required>
 
 
   <label>Appearance of guard on duty (comment)</label>
-  <input type="text" id="guardAppearance" maxlength="100" required>
+  <input type="text" id="guardAppearance" data-maxchars="55" required>
 
 
   <label>Appearance of guard desk / work area (comment)</label>
-  <input type="text" id="deskAppearance" required>
+  <input type="text" id="deskAppearance" data-maxchars="50" required>
 
 
 
   <label>Does the guard have all relevant contact numbers?</label>
-  <input id="guardContact" required>
+  <input type="text" id="guardContact" data-maxchars="45" required>
 </div>
 
 <div class="section">
@@ -126,7 +126,7 @@ if (sessionStorage.getItem("LOGGED_IN") !== "YES") {
 
 
   <label>What changes have you made?</label>
-  <input type="text" id="changesMade" required>
+  <input type="text" id="changesMade" data-maxchars="63" required>
 
 
   <label>Is security guard visually checking 10% of QR ID Cards for personal entering commercial premises </label>
@@ -144,12 +144,12 @@ if (sessionStorage.getItem("LOGGED_IN") !== "YES") {
 
 
   <label>Supervisor name</label>
-  <input id="supervisorName" required>
+  <input type="text" id="supervisorName" data-maxchars="26" required>
 
 
 
   <label>How many upervisors Visited in the last 7 days?)</label>
-  <input type="number" id="supervisors7Days" required>
+  <input type="number" id="supervisors7Days" data-maxdigits="2" required>
 
 
 
@@ -170,7 +170,7 @@ if (sessionStorage.getItem("LOGGED_IN") !== "YES") {
 
 
   <label>List keys audited</label>
-  <input type="text" id="keysAudited" required>
+  <input type="text" id="keysAudited" data-maxchars="70" required>
 </div>
 
 <div class="section">
@@ -184,7 +184,7 @@ if (sessionStorage.getItem("LOGGED_IN") !== "YES") {
 
 
   <label>How many cameras?</label>
-  <input type="number" id="numCameras" required>
+  <input type="number" id="numCameras" data-maxdigits="2" required>
 
 
 
