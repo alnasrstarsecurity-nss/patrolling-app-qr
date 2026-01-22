@@ -189,23 +189,23 @@ if (sessionStorage.getItem("LOGGED_IN") !== "YES") {
 
 
   <label>Locking and security on doors (ACS) Functional</label>
-  <input id="acsFunctional" required>
+  <input type="text" id="acsFunctional" data-maxchars="45" required>
 
 
 
   <label>Is the perimeter secure?</label>
-  <input id="perimeterSecure" required>
+  <input type="text" id="perimeterSecure" data-maxchars="60" required>
 </div>
 
 <div class="section">
   <h3>Apartment Inspection</h3>
   <label>Apartment inspection</label>
-  <input id="apartmentInspection" required>
+  <input type="text" id="apartmentInspection" data-maxchars="60" required>
 
 
 
   <label>Remarks</label>
-  <textarea id="apartmentRemark"></textarea>
+  <input type="text" id="apartmentRemark" data-maxchars="75">
 
 </div>
 
