@@ -211,7 +211,7 @@ if (sessionStorage.getItem("LOGGED_IN") !== "YES") {
 
   <div class="section">
   <label>LIst below actions you have taken or plan to take to rectify faults found</label>
-  <textarea id="actionsTaken" data-maxchars="75"></textarea>
+  <textarea id="actionsTaken" data-maxchars="450"></textarea>
   </div>
   
 
@@ -274,30 +274,28 @@ if (sessionStorage.getItem("LOGGED_IN") !== "YES") {
   <label>Patrolling Supervisor</label> 
 <input id="patrollingSupervisor"
   name="patrollingSupervisor"
-  type="text"
-  required
-  readonly>
+  type="text" data-maxchars="28" required readonly>
   
   <label>S/N</label>
-  <input id="serialNumber" name="serialNumber" type="text" required readonly>
+  <input id="serialNumber" name="serialNumber" type="text" data-maxchars="20" required readonly>
   
   <label>Building security name</label>
-  <input id="buildingSecurityName" required>
+  <input type="text" id="buildingSecurityName" data-maxchars="28" required>
 
 
 
   <label>Security staff number</label>
-  <input type="number" id="securityStaffNumber" required>
+  <input type="number" id="securityStaffNumber" data-maxdigits="10" required>
 
 
 
   <label>Building landline number</label>
-  <input type="number" id="buildingLandline" required>
+  <input type="number" id="buildingLandline" data-maxdigits="8" required>
 
 
 
   <label>Security duty mobile number</label>
-  <input type="number" id="securityDutyMobile" required>
+  <input type="number" id="securityDutyMobile" data-maxdigits="10" required>
 </div>
 
   <div class="section">
