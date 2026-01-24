@@ -152,7 +152,7 @@ if (sessionStorage.getItem("LOGGED_IN") !== "YES") {
        </p>
     
     <label>Other Area</label>
-    <input type="text" id="Area">
+    <input type="text" id="Area" data-maxchars="19">
 
     </div>
 
@@ -160,25 +160,25 @@ if (sessionStorage.getItem("LOGGED_IN") !== "YES") {
     <h3>Occupant(s) Details</h3>
 
     <label>Occupant Name</label>
-    <input id="OccupantName">
+    <input type="text" id="OccupantName" data-maxchars="30">
 
     <label>Occupant Nationality</label>
-    <input id="OccupantNationality">
+    <input type="text" id="OccupantNationality" data-maxchars="25">
 
     <label>Floor No</label>
-    <input id="FloorNo">
+    <input type="text" id="FloorNo" data-maxchars="8">
 
     <label>Flat No</label>
-    <input id="FlatNo">
+    <input type="text" id="FlatNo" data-maxchars="8">
 
     <label>Staff Number</label>
-    <input id="StaffNumber">
+    <input type="text" id="StaffNumber" data-maxchars="8">
 
     <label>Department</label>
-    <input id="Department">
+    <input type="text" id="Department" data-maxchars="14">
 
     <label>Room No</label>
-    <input id="RoomNo">
+    <input type="text" id="RoomNo" data-maxchars="8">
 
      <label>At The Time Of Fire Alarm Occupant Was In</label><br>
       <div class="check-row">
@@ -293,7 +293,7 @@ if (sessionStorage.getItem("LOGGED_IN") !== "YES") {
        </div>
 
          <label>Description of the Incident</label>
-         <input id="DescriptionIncident" required>
+         <input type="text" id="DescriptionIncident" required data-maxchars="59">
          
 
          <label>Cause of the incident</label>
@@ -319,7 +319,7 @@ if (sessionStorage.getItem("LOGGED_IN") !== "YES") {
 <option value="It was due to Heat ">It was due to Heat </option>
 <option value="Others">Others</option>
            </select>
-         <input type="text" id="OtherCause" placeholder="Specify Cuase Of Incident " style="display:none;">
+         <input type="text" id="OtherCause" placeholder="Specify Cuase Of Incident " style="display:none;" data-maxchars="59">
 
 
        <div class="yesno">
@@ -329,10 +329,10 @@ if (sessionStorage.getItem("LOGGED_IN") !== "YES") {
        </div>
 
          
-         <input id="SpecifyDamage" placeholder="Specify damage details" style="display:none;">
+         <input type="text" id="SpecifyDamage" placeholder="Specify damage details" style="display:none;" data-maxchars="43">
 
           <label>Action taken/observations by the guard</label>
-         <textarea id="Actiontaken" required></textarea>
+         <textarea id="Actiontaken" required data-maxchars="230"></textarea>
          
      </div>
 
@@ -350,10 +350,10 @@ if (sessionStorage.getItem("LOGGED_IN") !== "YES") {
        <div class="section">
          <h3>Other Information</h3>
          <label>Name of the Security Guard :</label>
-         <input id="GuardName" required>
+         <input type="text" id="GuardName" required data-maxchars="31">
 
          <label>Staff No: </label>
-         <input id="StaffNo" required>
+         <input type="text" id="StaffNo" required data-maxchars="8">
 
          <div class="yesno">
         <label style="font-weight: bold;">Company Name:</label>    
@@ -367,7 +367,7 @@ if (sessionStorage.getItem("LOGGED_IN") !== "YES") {
           </div>
 
           <label>Name :</label>
-         <input id="QRStafName" required>
+         <input type="text" id="QRStafName" required data-maxchars="30">
 
          <div class="yesno">
         <label style="font-weight: bold;">Did you meet the occupant during the incident:</label>    
@@ -393,7 +393,7 @@ if (sessionStorage.getItem("LOGGED_IN") !== "YES") {
            </div>
 
          <label>Name of the Housing Officer: </label>
-         <input type="text" id="HousingOfficerName">
+         <input type="text" id="HousingOfficerName" data-maxchars="35">
 
        </div> 
  
