@@ -254,39 +254,60 @@ form.addEventListener("submit", async e => {
     "Content-Type": "application/json"
   },
   body: JSON.stringify({
-    action: "submitfire",   // ✅ VERY IMPORTANT
+    action: "submitfire",
     ...payload
   })
 })
-    .then(r => r.json())
-    .then(res => {
-      if (res.status === "success") {
-        status.innerText = "✅ Submitted Successfully";
-        status.style.color = "green";
-        form.reset();
-        submitBtn.disabled = false;
-        specifyDamage.style.display = "none";
-        specifyDamage.required = false;
-        otherCause.style.display = "none";
-        otherCause.required = false;
-        setTimeout(() => status.innerText = "", 3000);
+.then(async r => {
+  const text = await r.text();   // 👈 read as text first
+  console.log("Server response:", text);
 
-          // ⭐ CALL PDF IN BACKGROUND
+  try {
+    return JSON.parse(text);     // 👈 try to parse JSON safely
+  } catch (e) {
+    throw new Error("Invalid JSON response");
+  }
+})
+.then(res => {
+
+  if (res.status === "success") {
+
+    status.innerText = "✅ Submitted Successfully";
+    status.style.color = "green";
+
+    // ⭐ Background PDF
     fetch(FIRE_SCRIPT_URL, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify({
         action: "generatepdf",
         row: res.row
       })
-    });
-         
-      } else {
-        status.innerText = "❌ Submission Failed";
-        status.style.color = "red";
-      }
-    })
-    .catch(err => {
-      status.innerText = "❌ Network Error";
-      status.style.color = "red";
-    });
+    }).catch(err => console.log("PDF error:", err));
+
+    form.reset();
+    submitBtn.disabled = false;
+    specifyDamage.style.display = "none";
+    specifyDamage.required = false;
+    otherCause.style.display = "none";
+    otherCause.required = false;
+
+    setTimeout(() => status.innerText = "", 3000);
+
+  } else {
+    status.innerText = "❌ Submission Failed";
+    status.style.color = "red";
+    submitBtn.disabled = false;
+  }
+
+})
+.catch(err => {
+  console.error("REAL ERROR:", err);
+  status.innerText = "❌ Server Error";
+  status.style.color = "red";
+  submitBtn.disabled = false;
+});
+
 });
