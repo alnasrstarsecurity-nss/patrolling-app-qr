@@ -1,4 +1,4 @@
-const FIRE_SCRIPT_URL ="https://script.google.com/macros/s/AKfycbyVUBucjikBkF8_XtpicZNTR8bTLsntx7vhM-EYL37S_0JUYBzMVapiroBhltxg9tBZzg/exec";
+const FIRE_SCRIPT_URL ="https://script.google.com/macros/s/AKfycbzK17MQ0dpQtdqsda2MTCZPETMLzKpa9w7jyUNb5ZkOgVOEd9B75GQ41d4mnwyvMur0uQ/exec";
 
 const form = document.getElementById("fireForm");
 const status = document.getElementById("status");
@@ -166,27 +166,37 @@ function getCheckedValues(name) {
     .join(", ");
 }
 
+/* ===============================
+   FIRE FORM SUBMISSION
+================================ */
 form.addEventListener("submit", async e => {
   e.preventDefault();
-
-   // ✅ Alarm Activated validation (BLOCKS submission)
-  const checked = Array.from(alarmChecks).some(cb => cb.checked);
-  if (!checked) {
-    alarmError.style.display = "block";
-    alarmChecks[0].focus();
-    return; // ⛔ STOP EVERYTHING
-  } else {
-    alarmError.style.display = "none";
-  }
-
-    submitBtn.disabled = true;
+  submitBtn.disabled = true;
 
   status.innerText = "Submitting...";
   status.style.color = "blue";
 
-  // Build payload using EXACT SHEET COLUMN NAMES
+  // ✅ Alarm Activated validation
+  const checked = Array.from(alarmChecks).some(cb => cb.checked);
+  if (!checked) {
+    alarmError.style.display = "block";
+    alarmChecks[0].focus();
+    submitBtn.disabled = false;
+    return;
+  } else {
+    alarmError.style.display = "none";
+  }
+
+  // ---- Prepare attachments ----
+  const attach1 = await filesToBase64(form.attach1, 10);
+  const attach2 = await fileToBase64(form.attach2);
+  const attach3 = await fileToBase64(form.attach3);
+  const attach4 = await fileToBase64(form.attach4);
+
+  // ---- Build payload in exact column order ----
   const payload = {
-    "Timestamp": new Date().toLocaleString(),
+    action: "submitfire",
+
     "Building Name": BuildingName.value,
     "Type of Incident": radio("TypeofInciden"),
     "Evacuated": radio("guardPosition"),
@@ -221,18 +231,16 @@ form.addEventListener("submit", async e => {
 
     "Description of the Incident": DescriptionIncident.value,
     "Cause of the Incident": Cause.value,
-     "Other Cause":OtherCause.value,
+    "Other Cause": OtherCause.value,
 
     "Property Damage": radio("Damage"),
     "Property Damage Specify": SpecifyDamage.value,
-
     "Action Taken": Actiontaken.value,
-    "Other Information": "",
 
-    "Attachment 1": await filesToBase64(form.attach1, 10),
-    "Attachment 2": await fileToBase64(form.attach2),
-    "Attachment 3": await fileToBase64(form.attach3),
-    "Attachment 4": await fileToBase64(form.attach4),
+    "Attachment 1": attach1,
+    "Attachment 2": attach2,
+    "Attachment 3": attach3,
+    "Attachment 4": attach4,
 
     "Guard Name": GuardName.value,
     "Guard Staff No": StaffNo.value,
@@ -240,7 +248,6 @@ form.addEventListener("submit", async e => {
 
     "Inform QR Facilities Staff": radio("InformQR"),
     "Staff Name": QRStafName.value,
-
     "Meet the Occupant During The Incident": radio("MeetOccupant"),
 
     "Inform Cabin Crew Housing officer": radio("informCabinCrew"),
@@ -248,66 +255,54 @@ form.addEventListener("submit", async e => {
     "Housing officer Name": HousingOfficerName.value
   };
 
- fetch(FIRE_SCRIPT_URL, {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    action: "submitfire",
-    ...payload
-  })
-})
-.then(async r => {
-  const text = await r.text();   // 👈 read as text first
-  console.log("Server response:", text);
-
   try {
-    return JSON.parse(text);     // 👈 try to parse JSON safely
-  } catch (e) {
-    throw new Error("Invalid JSON response");
-  }
-})
-.then(res => {
-
-  if (res.status === "success") {
-
-    status.innerText = "✅ Submitted Successfully";
-    status.style.color = "green";
-
-    // ⭐ Background PDF
-    fetch(FIRE_SCRIPT_URL, {
+    const res = await fetch(FIRE_SCRIPT_URL, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        action: "generatepdf",
-        row: res.row
-      })
-    }).catch(err => console.log("PDF error:", err));
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    }).then(r => r.json());
 
-    form.reset();
-    submitBtn.disabled = false;
-    specifyDamage.style.display = "none";
-    specifyDamage.required = false;
-    otherCause.style.display = "none";
-    otherCause.required = false;
+    if (res.status === "success") {
+      status.innerText = "✅ Submitted Successfully";
+      status.style.color = "green";
 
-    setTimeout(() => status.innerText = "", 3000);
+      // ---- Background PDF generation ----
+      fetch(FIRE_SCRIPT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "generatepdf",
+          row: res.row
+        })
+      }).catch(err => console.log("PDF generation error:", err));
 
-  } else {
-    status.innerText = "❌ Submission Failed";
+      // ---- Reset form ----
+      form.reset();
+      submitBtn.disabled = false;
+      specifyDamage.style.display = "none";
+      specifyDamage.required = false;
+      otherCause.style.display = "none";
+      otherCause.required = false;
+      setTimeout(() => status.innerText = "", 3000);
+
+    } else {
+      status.innerText = "❌ Submission Failed";
+      status.style.color = "red";
+      submitBtn.disabled = false;
+    }
+
+  } catch (err) {
+    console.error("REAL ERROR:", err);
+    status.innerText = "❌ Server Error";
     status.style.color = "red";
     submitBtn.disabled = false;
   }
-
-})
-.catch(err => {
-  console.error("REAL ERROR:", err);
-  status.innerText = "❌ Server Error";
-  status.style.color = "red";
-  submitBtn.disabled = false;
 });
 
-});
+/* ===============================
+   LOGOUT
+================================ */
+function logout() {
+  localStorage.clear();
+  location.href = "index.html";
+}
