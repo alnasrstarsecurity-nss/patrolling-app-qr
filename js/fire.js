@@ -256,26 +256,16 @@ form.addEventListener("submit", async e => {
   };
 
   // ---- SEND TO GOOGLE SCRIPT ----
-  fetch(FIRE_SCRIPT_URL, {
+  fetch(SCRIPT_URL, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload)
   })
+     
   .then(r => r.json())
   .then(res => {
     if (res.status === "success") {
       status.innerText = "✅ Submitted Successfully";
       status.style.color = "green";
-
-      // ---- Background PDF generation ----
-      fetch(FIRE_SCRIPT_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          action: "generatepdf",
-          row: res.row
-        })
-      }).catch(err => console.log("PDF generation error:", err));
 
       // ---- Reset form ----
       form.reset();
@@ -285,6 +275,15 @@ form.addEventListener("submit", async e => {
       otherCause.style.display = "none";
       otherCause.required = false;
       setTimeout(() => status.innerText = "", 3000);
+
+       /* Generate PDF in background */
+      fetch(SCRIPT_URL, {
+        method: "POST",
+        body: JSON.stringify({
+          action: "generatepdf",
+          row: res.row
+        })
+      }).catch(err => console.log("PDF generation error:", err));
 
     } else {
       status.innerText = "❌ Submission Failed";
