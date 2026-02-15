@@ -3,7 +3,7 @@
 /* ===============================
    CONFIG
 ================================ */
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxKOmxXp7o1TM9aJ1IM9u57It-OXJV2E4fn_dfScxC3ugtFJYMvYmAOcT9HESNSZ0ck/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbycv837LHCUgq6nwTMR1TMni-mH-OQQ_kCu7OukOYZGBXz-vY7ppZMjziNlktS-EKaw/exec";
 
 const form = document.getElementById("aqclForm");
 const status = document.getElementById("status");
@@ -317,6 +317,16 @@ form.addEventListener("submit", async e => {
          document.getElementById("serialNumber").value = qaidnumber;
         clearAqclSignature();
         setTimeout(() => status.innerText = "", 3000);
+
+           /* Generate PDF in background */
+      fetch(SCRIPT_URL, {
+        method: "POST",
+        body: JSON.stringify({
+          action: "generatepdf",
+          row: res.row
+        })
+      }).catch(err => console.log("PDF generation error:", err));
+         
       } else {
         status.innerText = "❌ Submission Failed";
         status.style.color = "red";
