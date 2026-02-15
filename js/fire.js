@@ -1,4 +1,4 @@
-const FIRE_SCRIPT_URL ="https://script.google.com/macros/s/AKfycbwDYhHA6zVhZa6jZWqK3SdLWw2ZNYnTbJB-XjD-Gp4EP_tMfneaqqYWxyXO4WmCiHNIXg/exec";
+const FIRE_SCRIPT_URL ="https://script.google.com/macros/s/AKfycbyMEnQ1H1mdjjjEHz5MPXZWsZfXGtNc9mZtrauwuhSwg7aDNMchiGv7NW7oUh9Sd6jQVw/exec";
 
 const form = document.getElementById("fireForm");
 const status = document.getElementById("status");
@@ -264,6 +264,16 @@ form.addEventListener("submit", async e => {
         otherCause.style.display = "none";
         otherCause.required = false;
         setTimeout(() => status.innerText = "", 3000);
+
+          // ⭐ CALL PDF IN BACKGROUND
+    fetch(FIRE_SCRIPT_URL, {
+      method: "POST",
+      body: JSON.stringify({
+        action: "generatepdf",
+        row: res.row
+      })
+    });
+         
       } else {
         status.innerText = "❌ Submission Failed";
         status.style.color = "red";
