@@ -1,7 +1,7 @@
 /* ===============================
    CONFIG
 ================================ */
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyz_66O3PCtR27DQzHOkXYe2zG1B2Yu1_65V66_IlE5Ytr0J2_f3gpULIIL6Zfn-Rg2/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx9dGDpyKWEc8d9YY_s9YTFVrh3tutHzp5fRrKj420VyOvDfL8TnU-r1eCCicaqMoRO/exec";
 
 const form = document.getElementById("incidentform");
 const status = document.getElementById("status");
@@ -299,6 +299,17 @@ form.addEventListener("submit", async e => {
         clearWitnessSignature();
         clearSupSignature();
         setTimeout(() => status.innerText = "", 3000);
+
+           /* Generate PDF in background */
+      fetch(SCRIPT_URL, {
+        method: "POST",
+        body: JSON.stringify({
+          action: "generatepdf",
+          row: res.row
+        })
+      }).catch(err => console.log("PDF generation error:", err));
+
+         
       } else {
         status.innerText = "❌ Submission Failed";
         status.style.color = "red";
