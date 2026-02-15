@@ -140,20 +140,6 @@ causeSelect.addEventListener("change", () => {
 const alarmChecks = document.querySelectorAll('input[name="AlarmActivated"]');
 const alarmError = document.getElementById("alarmError");
 
-/*form.addEventListener("submit", function (e) {
-  e.preventDefault(); // ✅ ALWAYS STOP native submit
-
-  const checked = Array.from(alarmChecks).some(cb => cb.checked);
-
-  if (!checked) {
-    alarmError.style.display = "block";
-    alarmChecks[0].focus();
-    return;
-  } else {
-    alarmError.style.display = "none";
-  }
-});*/
-//alarm activated mandatory
 
 function radio(name) {
   const r = document.querySelector(`input[name="${name}"]:checked`);
