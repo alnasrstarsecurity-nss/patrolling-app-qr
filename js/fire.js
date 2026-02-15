@@ -176,7 +176,7 @@ form.addEventListener("submit", async e => {
   status.innerText = "Submitting...";
   status.style.color = "blue";
 
-  // ✅ Alarm Activated validation
+  // ✅ Alarm Activated validation (at least one required)
   const checked = Array.from(alarmChecks).some(cb => cb.checked);
   if (!checked) {
     alarmError.style.display = "block";
@@ -193,75 +193,76 @@ form.addEventListener("submit", async e => {
   const attach3 = await fileToBase64(form.attach3);
   const attach4 = await fileToBase64(form.attach4);
 
-  // ---- Build payload in exact column order ----
+  /* ---- PAYLOAD (camelCase + DD/MM/YYYY) ---- */
   const payload = {
     action: "submitfire",
 
-    "Building Name": BuildingName.value,
-    "Type of Incident": radio("TypeofInciden"),
-    "Evacuated": radio("guardPosition"),
-    "Date of Incident": Incidentdate.value,
-    "Incident Time": Incidenttime.value,
-    "Panel Reset Time": paneltime.value,
+    buildingName: BuildingName.value,
+    typeOfIncident: radio("TypeofInciden"),
+    evacuated: radio("guardPosition"),
+    dateOfIncident: toDDMMYYYY(Incidentdate.value),
+    incidentTime: Incidenttime.value,
+    panelResetTime: paneltime.value,
 
-    "Alarm Activated In": getCheckedValues("AlarmActivated"),
-    "Other Area": Area.value,
+    alarmActivatedIn: getCheckedValues("AlarmActivated"),
+    otherArea: Area.value,
 
-    "Occupant Name": OccupantName.value,
-    "Occupant Nationality": OccupantNationality.value,
-    "Floor No": FloorNo.value,
-    "Flat No": FlatNo.value,
-    "Staff Number": StaffNumber.value,
-    "Department": Department.value,
-    "Room No": RoomNo.value,
+    occupantName: OccupantName.value,
+    occupantNationality: OccupantNationality.value,
+    floorNo: FloorNo.value,
+    flatNo: FlatNo.value,
+    staffNumber: StaffNumber.value,
+    department: Department.value,
+    roomNo: RoomNo.value,
 
-    "Occupant Was In": getCheckedValues("OccupantWasIn"),
+    occupantWasIn: getCheckedValues("OccupantWasIn"),
 
-    "Exhaust Fan": radio("ExhaustFan"),
-    "Kitchen Cooking Hood": radio("KitchenCookingHood"),
-    "Kitchen Door": radio("KitchenDoor"),
-    "Fire Blanket Used": radio("FireBlanket"),
-    "Fire Extinguisher Used": radio("FireExtinguisher"),
+    exhaustFan: radio("ExhaustFan"),
+    kitchenCookingHood: radio("KitchenCookingHood"),
+    kitchenDoor: radio("KitchenDoor"),
+    fireBlanketUsed: radio("FireBlanket"),
+    fireExtinguisherUsed: radio("FireExtinguisher"),
 
-    "Type of Fire Extinguisher": getCheckedValues("TypeFireExtinguisher"),
+    typeOfFireExtinguisher: getCheckedValues("TypeFireExtinguisher"),
 
-    "Civil Defense Present": radio("Civil Defense"),
-    "CAMS Activated": radio("CAMS"),
-    "Injury Reported by Occupant": radio("Injury"),
+    civilDefensePresent: radio("Civil Defense"),
+    camsActivated: radio("CAMS"),
+    injuryReported: radio("Injury"),
 
-    "Description of the Incident": DescriptionIncident.value,
-    "Cause of the Incident": Cause.value,
-    "Other Cause": OtherCause.value,
+    descriptionOfIncident: DescriptionIncident.value,
+    causeOfIncident: Cause.value,
+    otherCause: OtherCause.value,
 
-    "Property Damage": radio("Damage"),
-    "Property Damage Specify": SpecifyDamage.value,
-    "Action Taken": Actiontaken.value,
+    propertyDamage: radio("Damage"),
+    propertyDamageSpecify: SpecifyDamage.value,
+    actionTaken: Actiontaken.value,
 
-    "Attachment 1": attach1,
-    "Attachment 2": attach2,
-    "Attachment 3": attach3,
-    "Attachment 4": attach4,
+    attach1: attach1,
+    attach2: attach2,
+    attach3: attach3,
+    attach4: attach4,
 
-    "Guard Name": GuardName.value,
-    "Guard Staff No": StaffNo.value,
-    "Company Name": radio("Company"),
+    guardName: GuardName.value,
+    guardStaffNo: StaffNo.value,
+    companyName: radio("Company"),
 
-    "Inform QR Facilities Staff": radio("InformQR"),
-    "Staff Name": QRStafName.value,
-    "Meet the Occupant During The Incident": radio("MeetOccupant"),
+    informQRStaff: radio("InformQR"),
+    staffName: QRStafName.value,
+    meetOccupantDuringIncident: radio("MeetOccupant"),
 
-    "Inform Cabin Crew Housing officer": radio("informCabinCrew"),
-    "Housing Officer Visit the Site": radio("housingofficerVisit"),
-    "Housing officer Name": HousingOfficerName.value
+    informCabinCrew: radio("informCabinCrew"),
+    housingOfficerVisit: radio("housingofficerVisit"),
+    housingOfficerName: HousingOfficerName.value
   };
 
-  try {
-    const res = await fetch(FIRE_SCRIPT_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    }).then(r => r.json());
-
+  // ---- SEND TO GOOGLE SCRIPT ----
+  fetch(FIRE_SCRIPT_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  })
+  .then(r => r.json())
+  .then(res => {
     if (res.status === "success") {
       status.innerText = "✅ Submitted Successfully";
       status.style.color = "green";
@@ -290,19 +291,12 @@ form.addEventListener("submit", async e => {
       status.style.color = "red";
       submitBtn.disabled = false;
     }
-
-  } catch (err) {
+  })
+  .catch(err => {
     console.error("REAL ERROR:", err);
     status.innerText = "❌ Server Error";
     status.style.color = "red";
     submitBtn.disabled = false;
-  }
+  });
 });
 
-/* ===============================
-   LOGOUT
-================================ */
-function logout() {
-  localStorage.clear();
-  location.href = "index.html";
-}
