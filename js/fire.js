@@ -242,7 +242,7 @@ form.addEventListener("submit", async e => {
   };
 
   // ---- SEND TO GOOGLE SCRIPT ----
-  fetch(SCRIPT_URL, {
+  fetch(FIRE_SCRIPT_URL, {
     method: "POST",
     body: JSON.stringify(payload)
   })
@@ -263,7 +263,7 @@ form.addEventListener("submit", async e => {
       setTimeout(() => status.innerText = "", 3000);
 
        /* Generate PDF in background */
-      fetch(SCRIPT_URL, {
+      fetch(FIRE_SCRIPT_URL, {
         method: "POST",
         body: JSON.stringify({
           action: "generatepdf",
