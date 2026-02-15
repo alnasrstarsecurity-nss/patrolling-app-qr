@@ -248,10 +248,16 @@ form.addEventListener("submit", async e => {
     "Housing officer Name": HousingOfficerName.value
   };
 
-  fetch(FIRE_SCRIPT_URL, {
-    method: "POST",
-    body: JSON.stringify(payload)
+ fetch(FIRE_SCRIPT_URL, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    action: "submitfire",   // ✅ VERY IMPORTANT
+    ...payload
   })
+})
     .then(r => r.json())
     .then(res => {
       if (res.status === "success") {
