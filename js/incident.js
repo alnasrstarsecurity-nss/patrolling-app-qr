@@ -15,12 +15,12 @@ submitBtn.disabled = false;
 /* ===============================
    user full name
 ================================ */
-//const loginName = sessionStorage.getItem("LOGIN_NAME");
+/*const loginName = sessionStorage.getItem("LOGIN_NAME");
 
 if (!loginName) {
   alert("Session expired. Please login again.");
   window.location.replace("index.html");
-}
+}*/
 
 // 🔹 Auto-fill supervisor name
 //document.getElementById("reportedBy").value = loginName;
