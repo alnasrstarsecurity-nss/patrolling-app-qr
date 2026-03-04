@@ -23,7 +23,7 @@ if (!loginName) {
 }
 
 // 🔹 Auto-fill supervisor name
-document.getElementById("reportedBy").value = loginName;
+//document.getElementById("reportedBy").value = loginName;
 
 
 //other insident
@@ -277,7 +277,7 @@ form.addEventListener("submit", async e => {
   attach3: await fileToBase64(form.attach3),
   attach4: await fileToBase64(form.attach4),
 
-  reportedBy: form.reportedBy.value,
+ // reportedBy: form.reportedBy.value,
   supSign: document.getElementById("supSignPad").toDataURL(),
 
 };
@@ -294,7 +294,7 @@ form.addEventListener("submit", async e => {
         status.innerText = "✅ Submitted Successfully";
         status.style.color = "green";
         form.reset();
-         document.getElementById("reportedBy").value = loginName;
+        // document.getElementById("reportedBy").value = loginName;
          submitBtn.disabled = false;
         clearWitnessSignature();
         clearSupSignature();
