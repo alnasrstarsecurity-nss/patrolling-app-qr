@@ -1,7 +1,7 @@
 /* ===============================
    CONFIG
 ================================ */
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwBkD7GNs0OEe_6NEkGyvWTVs3nusE6lSHKJP4EtkDjqoGSSEPauKr1ycQaYe9DaRTi/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzrn5a-yB0D1jRm3MapGxec7wi2LrOQMv7NP22OwA4fWgzCoxsOzQsPTnPlssy7jnQg/exec";
 
 const form = document.getElementById("incidentform");
 const status = document.getElementById("status");
